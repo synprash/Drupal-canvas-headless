@@ -16,28 +16,31 @@ Welcome to the **Apex Digital Marketing** project repository. This site is built
 ## 🏗️ Architectural Overview
 
 ```mermaid
-graph TD
-    User([Site Visitor / Editor]) --> Nginx[Nginx Reverse Proxy (*.test)]
-    Nginx --> PHP[Drupal 11.4 PHP-FPM]
-    PHP --> MySQL[(MySQL Database)]
+flowchart TD
+    User(["Site Visitor / Editor"]) --> Nginx["Nginx Reverse Proxy (*.test)"]
+    Nginx --> PHP["Drupal 11.4 PHP-FPM"]
+    PHP --> MySQL[("MySQL Database")]
     
-    subgraph Drupal Canvas Layer
-        Canvas[Drupal Canvas Engine]
-        CP[Canvas Page Content Entities: canvas_page]
-        PR[Page Regions: flexus.header & flexus.footer]
-        SDC[Single Directory Components: SDC / Flexus]
+    subgraph CanvasLayer["Drupal Canvas Layer"]
+        Canvas["Drupal Canvas Engine"]
+        CP["Canvas Page Entities (canvas_page)"]
+        PR["Page Regions (flexus.header & flexus.footer)"]
+        SDC["Single Directory Components (SDC / Flexus)"]
         Canvas --> CP
         Canvas --> PR
         PR --> SDC
         CP --> SDC
     end
 
-    subgraph Structured Content Layer
-        Nodes[Custom Nodes: case_study]
-        Taxonomy[Vocabularies: service_category]
-        Forms[Drupal Contact Form: feedback]
+    subgraph ContentLayer["Structured Content Layer"]
+        Nodes["Custom Nodes (case_study)"]
+        Taxonomy["Vocabularies (service_category)"]
+        Forms["Drupal Contact Form (feedback)"]
         Nodes --> Taxonomy
     end
+
+    PHP --> CanvasLayer
+    PHP --> ContentLayer
 ```
 
 ---
