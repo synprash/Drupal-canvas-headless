@@ -1,0 +1,43 @@
+/**
+ * @file
+ * Apex Theme custom enhancements layered over Flexus design system.
+ */
+
+:root {
+  --apex-gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --apex-glow: 0 0 25px rgba(37, 99, 235, 0.18);
+  --apex-glass-bg: rgba(255, 255, 255, 0.85);
+  --apex-glass-border: rgba(226, 232, 240, 0.8);
+}
+
+.dark {
+  --apex-glass-bg: rgba(15, 23, 42, 0.85);
+  --apex-glass-border: rgba(51, 65, 85, 0.8);
+}
+
+/* Glassmorphism Card Style */
+.apex-glass-card {
+  background: var(--apex-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--apex-glass-border);
+  box-shadow: var(--apex-glow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.apex-glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+}
+
+/* Gradient Badge Pill */
+.apex-badge-gradient {
+  background: var(--apex-gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+}
+
+/* Smooth Scrolling & Section Transitions */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,22 @@
+uuid: 3c176b67-32ec-4e5a-927a-994d883c4d96
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: Q25Rf_J9DyVUkf6lFbvUiKE43f2YQzfqy7pSnCyD1ws
+id: apex_theme_powered
+theme: apex_theme
+region: footer
+weight: 1
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

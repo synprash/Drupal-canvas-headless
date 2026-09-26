@@ -1,0 +1,20 @@
+uuid: 5b519594-c96c-44b5-8814-a5276bd29413
+langcode: en
+status: true
+dependencies:
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: 4l30mMZmvM2yQNbwizfd8sr989oMsWqty4zk0aKCZKE
+id: apex_theme_primary_admin_actions
+theme: apex_theme
+region: content
+weight: -6
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

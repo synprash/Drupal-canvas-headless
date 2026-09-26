@@ -1,0 +1,22 @@
+uuid: a4af4a9f-4902-4218-9fe6-0d590ba50b78
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: Ps3y_46g1_RsBrYbx117nki05y0sPM7h9iSpbDl4oxY
+id: apex_theme_help
+theme: apex_theme
+region: content
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

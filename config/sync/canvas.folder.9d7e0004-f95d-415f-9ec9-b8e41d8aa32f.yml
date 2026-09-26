@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - canvas.component.marker.page_content
+    - canvas.component.sdc.apex_theme.stat-counter
     - canvas.component.sdc.navigation.message
     - canvas.component.sdc.navigation.title
     - canvas.component.sdc.olivero.teaser
@@ -13,6 +14,7 @@ configEntityTypeId: component
 weight: 0
 items:
   - marker.page_content
+  - sdc.apex_theme.stat-counter
   - sdc.navigation.message
   - sdc.navigation.title
   - sdc.olivero.teaser

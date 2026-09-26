@@ -1,0 +1,22 @@
+uuid: f2a21da2-2c05-428c-8cec-643ccba9793b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: TFLvt_pA01XsZFBK5HpnVfBwimlLUoNKOhlnvyWoevE
+id: apex_theme_breadcrumbs
+theme: apex_theme
+region: content
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

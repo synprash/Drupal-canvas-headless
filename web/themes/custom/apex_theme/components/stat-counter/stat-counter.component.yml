@@ -1,0 +1,32 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: 'Stat Counter'
+status: experimental
+description: 'High-impact animated numerical metric card with label, prefix, and suffix.'
+props:
+  type: object
+  properties:
+    number:
+      type: integer
+      title: 'Target Metric Number'
+      description: 'The number to count up to (e.g. 340, 42, 98).'
+      default: 100
+    prefix:
+      type: string
+      title: 'Prefix'
+      description: 'Symbol before the number (e.g. $, +).'
+      default: '+'
+    suffix:
+      type: string
+      title: 'Suffix'
+      description: 'Symbol after the number (e.g. %, M+, x).'
+      default: '%'
+    label:
+      type: string
+      title: 'Metric Label'
+      description: 'Description of the metric (e.g. Pipeline Growth).'
+      default: 'Growth Rate'
+    description:
+      type: string
+      title: 'Subtext'
+      description: 'Additional contextual details.'
+      default: 'Verified YoY average performance'

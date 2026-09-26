@@ -1,0 +1,15 @@
+name: 'Apex Theme'
+type: theme
+base theme: flexus
+description: 'Custom child theme of Flexus for Apex Digital Marketing with bespoke SDCs, design tokens, and glassmorphism styling.'
+core_version_requirement: ^11
+libraries:
+  - apex_theme/global
+regions:
+  content: Content
+  header: Header
+  footer: Footer
+dependencies:
+  - 'cva:cva'
+  - 'canvas:canvas'
+  - 'flexus:flexus'

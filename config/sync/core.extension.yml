@@ -60,4 +60,5 @@ theme:
   canvas_stark: 0
   flexus: 0
   default_admin: 0
+  apex_theme: 0
 profile: standard

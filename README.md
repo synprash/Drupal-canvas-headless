@@ -206,4 +206,253 @@ In adherence to Drupal and Composer best practices, **no core, contrib modules, 
   - `Drupal\apex_core\Template\SafeCvaTwigExtension` decorates `cva.twig_extension` (`cva` contrib module) via Symfony service decoration.
   - Automatically sanitizes nullable props passed to `cva.apply()` in Single Directory Component templates, eliminating `Using null as an array offset is deprecated` notices under PHP 8.4+ without altering vendor code.
 
+---
+
+## 🎨 7. Child Theme Architecture (`apex_theme`)
+
+To customize design tokens, extend component libraries, and layer custom CSS/JS behaviors on top of `flexus`, the project includes the custom child theme **`apex_theme`** (`web/themes/custom/apex_theme`):
+
+- **Theme Inheritance**: Configured with `base theme: flexus` in `apex_theme.info.yml`.
+- **Inherited Components**: Automatically inherits all Single Directory Components from `flexus` (`sdc.flexus.*`).
+- **Custom SDCs**: Adds bespoke child theme components such as `sdc.apex_theme.stat-counter` (`web/themes/custom/apex_theme/components/stat-counter/`) featuring numerical count-up animations and glassmorphism styling.
+- **Global Design Overrides**:
+  - `css/apex-theme.css`: Declares custom glassmorphism classes (`.apex-glass-card`), gradient accents, and CSS custom properties.
+  - `js/apex-theme.js`: Adds Drupal behavior scripts and IntersectionObserver-driven counter animations.
+
+---
+
+## ⚡ 8. Decoupled / Headless Architecture with Next.js
+
+Drupal 11 with Drupal Canvas can be deployed in a **Decoupled / Headless architecture**, pairing Drupal's authoring experience and visual Canvas builder with a **Next.js (App Router + React Server Components)** frontend.
+
+### Architecture Overview
+
+```mermaid
+flowchart LR
+    Editor(["Content Author / Editor"]) --> CanvasHUD["Drupal Canvas UI (Admin)"]
+    CanvasHUD -- "Live Component Tree Changes" --> IframePreview["Next.js Preview (Draft Mode)"]
+    
+    subgraph DrupalBackend ["Drupal 11 Backend (Headless API)"]
+        CanvasEngine["Canvas Component Trees"]
+        JSONAPI["JSON:API / Next-Drupal"]
+        CacheTags["Cache Tag Webhooks"]
+    end
+    
+    subgraph NextJSFrontend ["Next.js 15 Frontend (Vercel / Node)"]
+        RSC["React Server Components (app/[...slug]/page.tsx)"]
+        Dispatcher["CanvasTreeRenderer (Slot Traversal)"]
+        Registry["React Component Registry"]
+        ISR["Next.js Cache & ISR (revalidateTag)"]
+    end
+    
+    Visitor(["Public Site Visitor"]) --> NextJSFrontend
+    RSC --> JSONAPI
+    CacheTags --> ISR
+    Dispatcher --> Registry
+```
+
+---
+
+### 1. Data Contracts: Canvas Component Tree JSON Payload
+
+In a decoupled setup, Next.js fetches the `canvas_page` JSON:API endpoint (`/jsonapi/canvas_page/canvas_page/{uuid}`). The `component_tree` field returns a nested, flat, or mapped JSON tree:
+
+```json
+{
+  "id": "e4f1a23b-4567-4890-abcd-123456789abc",
+  "type": "canvas_page--canvas_page",
+  "attributes": {
+    "title": "Apex Digital Marketing - Home",
+    "path": { "alias": "/" },
+    "component_tree": {
+      "0:hero_root": {
+        "uuid": "hero-123",
+        "component_id": "sdc.flexus.hero-side-by-side",
+        "inputs": {
+          "eyebrow": "DATA-DRIVEN ROI & PIPELINE GROWTH",
+          "heading": "Scale Your Revenue with High-Performance Acquisition",
+          "aspect_ratio": "16:9",
+          "media": { "target_id": 2 }
+        }
+      },
+      "0:hero_root:actions:btn1": {
+        "parent_uuid": "hero-123",
+        "slot": "actions",
+        "uuid": "btn-456",
+        "component_id": "sdc.flexus.button",
+        "inputs": {
+          "text": "Book Strategy Call",
+          "href": "/contact",
+          "variant": "primary"
+        }
+      },
+      "1:stats_root": {
+        "uuid": "stat-789",
+        "component_id": "sdc.apex_theme.stat-counter",
+        "inputs": {
+          "number": 340,
+          "prefix": "+",
+          "suffix": "%",
+          "label": "Average Pipeline Growth"
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+### 2. Next.js Dynamic Component Registry
+
+Create a mapping between Drupal Canvas SDC IDs (`sdc.flexus.*`, `sdc.apex_theme.*`) and their React Server / Client component equivalents:
+
+```tsx
+// components/canvas/registry.tsx
+import React from 'react';
+import dynamic from 'next/dynamic';
+
+export const ComponentRegistry: Record<string, React.ComponentType<any>> = {
+  'sdc.flexus.hero-side-by-side': dynamic(() => import('@/components/HeroSideBySide')),
+  'sdc.flexus.section': dynamic(() => import('@/components/Section')),
+  'sdc.flexus.card': dynamic(() => import('@/components/Card')),
+  'sdc.flexus.button': dynamic(() => import('@/components/Button')),
+  'sdc.flexus.accordion': dynamic(() => import('@/components/Accordion')),
+  'sdc.flexus.accordion-container': dynamic(() => import('@/components/AccordionContainer')),
+  'sdc.flexus.form': dynamic(() => import('@/components/WebformHandler')),
+  'sdc.apex_theme.stat-counter': dynamic(() => import('@/components/StatCounter')),
+};
+```
+
+---
+
+### 3. Recursive Component Tree Renderer
+
+A universal dispatcher in Next.js traverses the component tree, matches parent-child slots, and renders components hierarchically:
+
+```tsx
+// components/canvas/CanvasTreeRenderer.tsx
+import React from 'react';
+import { ComponentRegistry } from './registry';
+
+interface ComponentNode {
+  uuid: string;
+  component_id: string;
+  inputs: Record<string, any>;
+  parent_uuid?: string | null;
+  slot?: string | null;
+}
+
+export function CanvasTreeRenderer({ 
+  tree, 
+  parentUuid = null, 
+  slot = null 
+}: { 
+  tree: Record<string, ComponentNode>; 
+  parentUuid?: string | null; 
+  slot?: string | null;
+}) {
+  const nodes = Object.values(tree).filter(node => 
+    (node.parent_uuid || null) === parentUuid && (node.slot || null) === slot
+  );
+
+  return (
+    <>
+      {nodes.map(node => {
+        const Component = ComponentRegistry[node.component_id];
+        if (!Component) {
+          console.warn(`Missing React component for SDC: ${node.component_id}`);
+          return null;
+        }
+
+        // Render child slots recursively as props or children
+        const renderSlot = (targetSlot: string) => (
+          <CanvasTreeRenderer tree={tree} parentUuid={node.uuid} slot={targetSlot} />
+        );
+
+        return (
+          <Component 
+            key={node.uuid} 
+            {...node.inputs} 
+            renderSlot={renderSlot}
+            uuid={node.uuid}
+          />
+        );
+      })}
+    </>
+  );
+}
+```
+
+---
+
+### 4. Next.js App Router Page Implementation
+
+```tsx
+// app/[...slug]/page.tsx
+import { notFound } from 'next/navigation';
+import { CanvasTreeRenderer } from '@/components/canvas/CanvasTreeRenderer';
+import { draftMode } from 'next/headers';
+
+async function getCanvasPage(path: string) {
+  const { isEnabled: isDraft } = await draftMode();
+  const endpoint = `${process.env.DRUPAL_BASE_URL}/jsonapi/canvas_page/canvas_page?filter[path.alias]=${encodeURIComponent(path)}`;
+
+  const res = await fetch(endpoint, {
+    next: {
+      tags: [`canvas_page:${path}`, 'canvas_pages'],
+      revalidate: isDraft ? 0 : 3600, // Instant update in preview, 1h ISR for production
+    },
+    headers: isDraft ? { 'Authorization': `Bearer ${process.env.DRUPAL_PREVIEW_TOKEN}` } : {},
+  });
+
+  if (!res.ok) return null;
+  const json = await res.json();
+  return json.data?.[0] || null;
+}
+
+export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const { slug } = await params;
+  const path = `/${slug ? slug.join('/') : ''}`;
+  const pageData = await getCanvasPage(path);
+
+  if (!pageData) notFound();
+
+  return (
+    <main className="min-h-screen">
+      <CanvasTreeRenderer tree={pageData.attributes.component_tree} />
+    </main>
+  );
+}
+```
+
+---
+
+### 5. Live Visual Preview in Drupal Canvas
+
+Drupal Canvas supports decoupling through **Astro / Next.js Hydration bridges**:
+
+1. **Draft Mode Endpoint (`/api/draft`)**:
+   - Drupal Canvas passes a preview secret when opening the Next.js preview iframe.
+   - Next.js enables `draftMode().enable()` and sets preview cookies.
+2. **Bidirectional `postMessage` Communication**:
+   - As an author changes props in the Drupal Canvas sidebar, Canvas emits:
+     ```javascript
+     iframe.contentWindow.postMessage({
+       type: 'CANVAS_COMPONENT_UPDATE',
+       uuid: 'stat-789',
+       inputs: { number: 450 }
+     }, '*');
+     ```
+   - A client-side React listener updates the component state in real time without refreshing the page.
+
+---
+
+### 6. Sub-Second Incremental Static Regeneration (ISR)
+
+When editors publish changes in Drupal:
+1. Drupal's `next` or `webhook` module emits a POST request to Next.js (`/api/revalidate?tag=canvas_page:/services&secret=...`).
+2. Next.js executes `revalidateTag(tag)` instantly, purging the edge cache globally across Vercel / Cloudflare edge nodes without full site rebuilds.
+
+
 

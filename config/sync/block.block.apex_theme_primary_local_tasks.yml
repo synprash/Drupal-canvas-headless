@@ -1,0 +1,22 @@
+uuid: 5fdf9dc3-405e-4be6-970e-1e1de9ba8710
+langcode: en
+status: true
+dependencies:
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: hpzZG43pSkdcrQBZ8_KGFmlpR8VeNOZd_R4mGnfYl2Y
+id: apex_theme_primary_local_tasks
+theme: apex_theme
+region: content
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

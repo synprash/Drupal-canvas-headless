@@ -1,0 +1,10 @@
+global:
+  css:
+    theme:
+      css/apex-theme.css: {}
+  js:
+    js/apex-theme.js: {}
+  dependencies:
+    - flexus/global
+    - core/drupal
+    - core/once

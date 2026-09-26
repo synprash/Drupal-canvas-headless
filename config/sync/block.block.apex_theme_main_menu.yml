@@ -1,0 +1,27 @@
+uuid: d2eca076-1d49-4ea7-81a8-4421b4e0efab
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - apex_theme
+_core:
+  default_config_hash: f02D5uA5doCdjEA9xfYk05-cQAtlvKdt3EMlAtGVchk
+id: apex_theme_main_menu
+theme: apex_theme
+region: header
+weight: 1
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }

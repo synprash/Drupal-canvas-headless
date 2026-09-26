@@ -1,0 +1,15 @@
+<div class="apex-glass-card rounded-2xl p-6 text-center flex flex-col items-center justify-center gap-2">
+  <div class="flex items-baseline font-black text-4xl lg:text-5xl text-primary tracking-tight">
+    {% if prefix %}<span class="text-3xl lg:text-4xl me-0.5 text-primary/80">{{ prefix }}</span>{% endif %}
+    <span data-apex-counter="{{ number }}">{{ number }}</span>
+    {% if suffix %}<span class="text-3xl lg:text-4xl ms-0.5 text-primary/80">{{ suffix }}</span>{% endif %}
+  </div>
+  <div class="font-bold text-lg text-foreground mt-1">
+    {{ label }}
+  </div>
+  {% if description %}
+    <div class="text-sm text-muted-foreground">
+      {{ description }}
+    </div>
+  {% endif %}
+</div>
