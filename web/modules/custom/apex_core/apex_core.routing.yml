@@ -2,6 +2,6 @@ apex_core.contact_submit:
   path: '/api/contact-submit'
   defaults:
     _controller: '\Drupal\apex_core\Controller\ContactSubmitController::submit'
-  methods: [POST]
+  methods: [POST, OPTIONS]
   requirements:
     _access: 'TRUE'

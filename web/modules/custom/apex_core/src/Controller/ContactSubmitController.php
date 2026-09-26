@@ -11,6 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 class ContactSubmitController extends ControllerBase {
 
   public function submit(Request $request): JsonResponse {
+    $corsHeaders = [
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-Methods' => 'POST, OPTIONS',
+      'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
+    ];
+
+    if ($request->getMethod() === 'OPTIONS') {
+      return new JsonResponse([], 200, $corsHeaders);
+    }
+
     $data = json_decode($request->getContent(), TRUE) ?: [];
 
     $name = trim($data['name'] ?? '');
@@ -19,12 +29,12 @@ class ContactSubmitController extends ControllerBase {
     $message = trim($data['message'] ?? '');
 
     if (empty($name) || empty($email)) {
-      return new JsonResponse(['error' => 'Name and email are required.'], 400);
+      return new JsonResponse(['error' => 'Name and email are required.'], 400, $corsHeaders);
     }
 
     $webform = Webform::load('contact_form') ?: Webform::load('contact');
     if (!$webform) {
-      return new JsonResponse(['error' => 'Webform not found in Drupal.'], 404);
+      return new JsonResponse(['error' => 'Webform not found in Drupal.'], 404, $corsHeaders);
     }
 
     try {
@@ -47,9 +57,9 @@ class ContactSubmitController extends ControllerBase {
         'sid' => $submission->id(),
         'webform_id' => $webform->id(),
         'message' => 'Webform submission successfully saved in Drupal database.',
-      ]);
+      ], 200, $corsHeaders);
     } catch (\Throwable $e) {
-      return new JsonResponse(['error' => $e->getMessage()], 500);
+      return new JsonResponse(['error' => $e->getMessage()], 500, $corsHeaders);
     }
   }
 

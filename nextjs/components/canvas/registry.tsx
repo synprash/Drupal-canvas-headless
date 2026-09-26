@@ -409,11 +409,26 @@ export function Form() {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      // 1. First attempt: Direct to Drupal REST endpoint (supports CORS & browser certificate)
+      let res;
+      try {
+        res = await fetch('https://drupal-lerd.test/api/contact-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+      } catch (directErr) {
+        console.warn('Direct Drupal submission notice, trying internal proxy:', directErr);
+      }
+
+      // 2. Second attempt: Internal Next.js API proxy
+      if (!res || !res.ok) {
+        res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+      }
 
       const json = await res.json();
       setSubmissionResult(json?.data || json);

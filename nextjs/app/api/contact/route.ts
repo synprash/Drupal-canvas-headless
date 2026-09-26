@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
 import https from 'node:https';
-import http from 'node:http';
-import dns from 'node:dns';
-
-const DRUPAL_BASE_URL = process.env.DRUPAL_BASE_URL || 'https://drupal-lerd.test';
 
 export async function POST(request: Request) {
   try {
@@ -21,53 +17,39 @@ export async function POST(request: Request) {
       message: message || '',
     });
 
-    const result = await new Promise((resolve, reject) => {
-      const url = new URL('/api/contact-submit', DRUPAL_BASE_URL);
-      const isHttps = url.protocol === 'https:';
-      const lib = isHttps ? https : http;
-
-      const req = lib.request(
-        {
-          hostname: url.hostname,
-          port: url.port || (isHttps ? 443 : 80),
-          path: url.pathname,
-          method: 'POST',
-          headers: {
-            'Host': url.hostname,
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(payload),
-            'User-Agent': 'NextJS-Decoupled-Form/1.0',
-          },
-          rejectUnauthorized: false,
-          lookup: (hostname, opts, cb) => {
-            if (typeof opts === 'function') {
-              cb = opts;
-              opts = {};
-            }
-            if (hostname.endsWith('.test') || hostname === 'drupal-lerd.test') {
-              return cb(null, '127.0.0.1', 4);
-            }
-            return dns.lookup(hostname, opts, cb);
-          },
+    const result = await new Promise<{ success: boolean; sid?: string; message?: string }>((resolve, reject) => {
+      const options: https.RequestOptions = {
+        hostname: '127.0.0.1',
+        port: 443,
+        path: '/api/contact-submit',
+        method: 'POST',
+        headers: {
+          'Host': 'drupal-lerd.test',
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payload),
+          'User-Agent': 'Apex-NextJS-Client/1.0',
         },
-        (res) => {
-          let data = '';
-          res.on('data', (chunk) => {
-            data += chunk;
-          });
-          res.on('end', () => {
-            if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-              try {
-                resolve(JSON.parse(data));
-              } catch {
-                resolve({ success: true, message: 'Submission saved.' });
-              }
-            } else {
-              reject(new Error(`Drupal returned HTTP ${res.statusCode}: ${data}`));
+        servername: 'drupal-lerd.test',
+        rejectUnauthorized: false,
+      };
+
+      const req = https.request(options, (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
+            try {
+              resolve(JSON.parse(data));
+            } catch {
+              resolve({ success: true, message: 'Submission saved.' });
             }
-          });
-        }
-      );
+          } else {
+            reject(new Error(`Drupal returned HTTP ${res.statusCode}: ${data}`));
+          }
+        });
+      });
 
       req.on('error', (err) => reject(err));
       req.setTimeout(5000, () => {
@@ -79,11 +61,11 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data: result });
   } catch (error: any) {
-    console.warn('[Next.js Contact API] Drupal backend notice:', error.message);
-    return NextResponse.json({
-      success: true,
-      message: 'Submission captured successfully.',
-      notice: error.message,
-    });
+    console.error('[Next.js Contact API Error]:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to submit form to Drupal.' },
+      { status: 500 }
+    );
   }
 }
+

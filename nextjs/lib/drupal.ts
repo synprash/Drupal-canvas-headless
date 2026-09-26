@@ -33,26 +33,17 @@ function fetchFromDrupal(endpoint: string): Promise<any> {
       const lib = isHttps ? https : http;
 
       const options: https.RequestOptions = {
-        hostname: url.hostname,
-        port: url.port || (isHttps ? 443 : 80),
+        hostname: '127.0.0.1',
+        port: 443,
         path: url.pathname + url.search,
         method: 'GET',
         headers: {
-          'Host': url.hostname,
+          'Host': 'drupal-lerd.test',
           'Accept': 'application/vnd.api+json, application/json',
           'User-Agent': 'Apex-NextJS-Client/1.0',
         },
+        servername: 'drupal-lerd.test',
         rejectUnauthorized: false,
-        lookup: (hostname, opts, callback) => {
-          if (typeof opts === 'function') {
-            callback = opts;
-            opts = {};
-          }
-          if (hostname.endsWith('.test') || hostname === 'drupal-lerd.test') {
-            return callback(null, '127.0.0.1', 4);
-          }
-          return dns.lookup(hostname, opts, callback);
-        },
       };
 
       const req = lib.request(options, (res) => {
