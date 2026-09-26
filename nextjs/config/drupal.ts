@@ -5,9 +5,12 @@
 export const drupalConfig = {
   /**
    * Base URL of the Drupal backend.
-   * Can be overridden via DRUPAL_BASE_URL environment variable.
+   * Can be overridden via NEXT_PUBLIC_DRUPAL_BASE_URL or DRUPAL_BASE_URL.
    */
-  baseUrl: process.env.DRUPAL_BASE_URL || 'https://drupal-lerd.test',
+  baseUrl:
+    process.env.NEXT_PUBLIC_DRUPAL_BASE_URL ||
+    process.env.DRUPAL_BASE_URL ||
+    'https://drupal-lerd.test',
 
   /**
    * Internal IP address for direct loopback resolution (bypassing OS DNS issues on .test domains).

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BaseSDCProps } from '@/types/canvas';
+import { formatDrupalHtml } from '@/lib/media';
 
 export interface CardPricingProps extends BaseSDCProps {
   heading_text?: string;
@@ -34,6 +35,7 @@ export function CardPricing({
 }: CardPricingProps) {
   const isHighlighted = promote || isPopular;
   const planTitle = heading_text || title;
+  const formattedText = text ? formatDrupalHtml(text) : '';
 
   return (
     <div
@@ -56,10 +58,10 @@ export function CardPricing({
           <span className="text-4xl lg:text-5xl font-extrabold text-foreground">{price}</span>
           <span className="text-muted-foreground">/mo</span>
         </div>
-        {text && (
+        {formattedText && (
           <div
             className="prose prose-sm text-foreground/80 mb-8 [&>ul]:space-y-2.5 [&>ul>li]:flex [&>ul>li]:items-center [&>ul>li]:gap-2"
-            dangerouslySetInnerHTML={{ __html: text }}
+            dangerouslySetInnerHTML={{ __html: formattedText }}
           />
         )}
       </div>

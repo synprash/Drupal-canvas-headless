@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { BaseSDCProps } from '@/types/canvas';
+import { formatDrupalHtml } from '@/lib/media';
 
 export interface AccordionProps extends BaseSDCProps {
   title?: string;
@@ -22,6 +23,7 @@ export function AccordionContainer({ renderSlot }: BaseSDCProps) {
  */
 export function Accordion({ title, content, open_by_default = false, renderSlot }: AccordionProps) {
   const [open, setOpen] = useState(open_by_default);
+  const formattedContent = content ? formatDrupalHtml(content) : '';
 
   return (
     <div className="border border-border rounded-xl bg-white overflow-hidden transition shadow-sm">
@@ -39,7 +41,7 @@ export function Accordion({ title, content, open_by_default = false, renderSlot 
       </button>
       {open && (
         <div className="p-5 pt-0 text-muted-foreground text-sm md:text-base leading-relaxed border-t border-border/50">
-          {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
+          {formattedContent && <div dangerouslySetInnerHTML={{ __html: formattedContent }} />}
           {renderSlot && renderSlot('accordion_content')}
         </div>
       )}

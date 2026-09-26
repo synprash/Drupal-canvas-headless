@@ -3,9 +3,12 @@
 import React from 'react';
 import { Sparkles, Zap } from 'lucide-react';
 import { BaseSDCProps } from '@/types/canvas';
+import { resolveDrupalMediaUrl, formatDrupalHtml } from '@/lib/media';
 
 export interface HeroSideBySideProps extends BaseSDCProps {
-  media?: { src?: string; alt?: string } | string;
+  media?: { src?: string; alt?: string; url?: string } | string;
+  image?: string;
+  image_url?: string;
   eyebrow?: string;
   heading?: string;
   heading_text?: string;
@@ -20,6 +23,8 @@ export interface HeroSideBySideProps extends BaseSDCProps {
  */
 export function HeroSideBySide({
   media,
+  image,
+  image_url,
   eyebrow,
   heading,
   heading_text,
@@ -29,10 +34,12 @@ export function HeroSideBySide({
   renderSlot,
 }: HeroSideBySideProps) {
   const title = heading_text || heading;
-  const desc = text || summary;
-  const hasMedia = media && (typeof media === 'string' ? media : media?.src);
-  const mediaSrc = typeof media === 'string' ? media : media?.src;
-  const mediaAlt = (typeof media === 'object' && media?.alt) || 'Apex Digital Hero';
+  const rawDesc = text || summary;
+  const desc = rawDesc ? formatDrupalHtml(rawDesc) : '';
+  
+  const rawMedia = media || image || image_url;
+  const mediaSrc = resolveDrupalMediaUrl(rawMedia);
+  const mediaAlt = (typeof media === 'object' && media?.alt) || title || 'Apex Digital Hero';
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-blue-50/60 via-slate-50/40 to-white border-b border-border">
@@ -64,7 +71,7 @@ export function HeroSideBySide({
         </div>
 
         <div className="relative">
-          {hasMedia ? (
+          {mediaSrc ? (
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border aspect-[16/10] bg-muted/40">
               <img
                 src={mediaSrc}

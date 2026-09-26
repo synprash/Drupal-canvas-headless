@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { BaseSDCProps } from '@/types/canvas';
+import { resolveDrupalMediaUrl, formatDrupalHtml } from '@/lib/media';
 
 export interface CardProps extends BaseSDCProps {
   heading_text?: string;
@@ -13,7 +14,8 @@ export interface CardProps extends BaseSDCProps {
   url?: string;
   href?: string;
   image?: string;
-  media?: { src?: string; alt?: string } | string;
+  image_url?: string;
+  media?: { src?: string; alt?: string; url?: string } | string;
   is_text_centered?: boolean;
 }
 
@@ -28,14 +30,17 @@ export function Card({
   url,
   href,
   image,
+  image_url,
   media,
   is_text_centered,
   renderSlot,
 }: CardProps) {
   const cardTitle = heading_text || title;
-  const cardText = text || summary;
+  const rawText = text || summary;
+  const formattedHtml = rawText ? formatDrupalHtml(rawText) : '';
   const linkUrl = url || href;
-  const imgSrc = image || (typeof media === 'string' ? media : media?.src);
+  const rawImg = image || image_url || media;
+  const imgSrc = resolveDrupalMediaUrl(rawImg);
 
   const Content = (
     <div
@@ -50,10 +55,10 @@ export function Card({
           </div>
         )}
         {cardTitle && <h3 className="text-xl font-bold text-foreground mb-3">{cardTitle}</h3>}
-        {cardText && (
+        {formattedHtml && (
           <div
             className="text-muted-foreground text-sm leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: cardText }}
+            dangerouslySetInnerHTML={{ __html: formattedHtml }}
           />
         )}
       </div>
