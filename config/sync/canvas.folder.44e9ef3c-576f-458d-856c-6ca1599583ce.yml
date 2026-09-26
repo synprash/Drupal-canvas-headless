@@ -1,0 +1,21 @@
+uuid: 44e9ef3c-576f-458d-856c-6ca1599583ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.flexus.accordion
+    - canvas.component.sdc.flexus.accordion-container
+    - canvas.component.sdc.flexus.footer
+    - canvas.component.sdc.flexus.group
+    - canvas.component.sdc.flexus.navbar
+    - canvas.component.sdc.flexus.section
+name: Layout
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.flexus.accordion
+  - sdc.flexus.accordion-container
+  - sdc.flexus.footer
+  - sdc.flexus.group
+  - sdc.flexus.navbar
+  - sdc.flexus.section

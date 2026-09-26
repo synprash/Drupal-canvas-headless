@@ -1,0 +1,79 @@
+uuid: 88f7ea57-28c3-428c-9b4c-012cbdeacb1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_menu_block.footer
+    - canvas.component.sdc.flexus.footer
+    - canvas.component.sdc.flexus.group
+    - canvas.component.sdc.flexus.icon
+    - canvas.component.sdc.flexus.text
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - flexus
+id: flexus.footer
+region: footer
+theme: flexus
+component_tree:
+  '0:4bb686aa-1718-4ea4-a66b-b4860be8818e':
+    uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    component_id: sdc.flexus.footer
+    component_version: d696cea1796b650e
+    inputs:
+      align: true
+  '0:footer_first:0:a1b2c3d4-e5f6-7890-abcd-ef1234567890':
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_first
+    uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    component_id: sdc.flexus.group
+    component_version: 5b8517841c0015ea
+    inputs:
+      flex_direction: row
+      flex_gap: md
+      items_align: start
+      flex_align: start
+  '0:footer_first:0:group_slot:0:bf10b7a6-7a11-429b-a23a-4ab88fc1f34c':
+    parent_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    slot: group_slot
+    uuid: bf10b7a6-7a11-429b-a23a-4ab88fc1f34c
+    component_id: sdc.flexus.icon
+    component_version: 3562ab5d8550c890
+    inputs:
+      icon: facebook-logo
+      icon_size: medium
+      url: 'https://www.facebook.com'
+  '0:footer_first:0:group_slot:1:4fb10949-e4fa-475e-8a72-15c958b7273c':
+    parent_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    slot: group_slot
+    uuid: 4fb10949-e4fa-475e-8a72-15c958b7273c
+    component_id: sdc.flexus.icon
+    component_version: 3562ab5d8550c890
+    inputs:
+      icon: linkedin-logo
+      icon_size: medium
+      url: 'https://www.linkedin.com'
+  '0:footer_utility_first:0:5c5858de-1fd9-4069-a43b-d3966f47f4cb':
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_utility_first
+    uuid: 5c5858de-1fd9-4069-a43b-d3966f47f4cb
+    component_id: block.system_menu_block.footer
+    component_version: 075503dbc228a45c
+    inputs:
+      label: Footer
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: false
+  '0:footer_utility_last:0:98ac96c2-3f74-467f-be72-c0c4f1b19aba':
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_utility_last
+    uuid: 98ac96c2-3f74-467f-be72-c0c4f1b19aba
+    component_id: sdc.flexus.text
+    component_version: 3443cdaa2ab72bec
+    inputs:
+      text: '© 2026 Apex Digital Marketing. All rights reserved.'
+      text_size: text-sm
+      text_color: default

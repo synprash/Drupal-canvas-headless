@@ -1,0 +1,128 @@
+uuid: e6ff1039-21f5-4109-ab32-5ef31a9d2b2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.footer
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.marker.page_content
+    - canvas.component.sdc.flexus.footer
+    - canvas.component.sdc.flexus.group
+    - canvas.component.sdc.flexus.icon
+    - canvas.component.sdc.flexus.navbar
+    - canvas.component.sdc.flexus.text
+    - canvas.component.theme_page_template.flexus
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: theme_flexus
+label: 'Flexus theme'
+description: null
+component_tree:
+  2e4961e5-f689-43e7-abc3-e730d332e797:
+    uuid: 2e4961e5-f689-43e7-abc3-e730d332e797
+    component_id: theme_page_template.flexus
+    component_version: 15fe1e06320b1035
+    inputs: {  }
+  9ec6c0fc-7b4d-43f1-a57b-ba2aa8be9317:
+    parent_uuid: 2e4961e5-f689-43e7-abc3-e730d332e797
+    slot: content
+    uuid: 9ec6c0fc-7b4d-43f1-a57b-ba2aa8be9317
+    component_id: marker.page_content
+    component_version: 3b12c0b99a6caecc
+    inputs: {  }
+  3b448d2f-f191-44cb-8189-2362dbf3fe18:
+    parent_uuid: 2e4961e5-f689-43e7-abc3-e730d332e797
+    slot: header
+    uuid: 3b448d2f-f191-44cb-8189-2362dbf3fe18
+    component_id: sdc.flexus.navbar
+    component_version: 82a4dba15a29b43e
+    inputs:
+      menu_align: right
+  032b3150-7557-468a-ba40-d1c8fdc27f11:
+    parent_uuid: 3b448d2f-f191-44cb-8189-2362dbf3fe18
+    slot: logo
+    uuid: 032b3150-7557-468a-ba40-d1c8fdc27f11
+    component_id: block.system_branding_block
+    component_version: 7d528e00f56b3abf
+    inputs:
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: true
+      use_site_name: true
+      use_site_slogan: false
+  6d13ceff-24ca-47d3-9a3b-10bc48480618:
+    parent_uuid: 3b448d2f-f191-44cb-8189-2362dbf3fe18
+    slot: navigation
+    uuid: 6d13ceff-24ca-47d3-9a3b-10bc48480618
+    component_id: block.system_menu_block.main
+    component_version: 322535c0078cf59c
+    inputs:
+      label: 'Main navigation'
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: false
+  4bb686aa-1718-4ea4-a66b-b4860be8818e:
+    parent_uuid: 2e4961e5-f689-43e7-abc3-e730d332e797
+    slot: footer
+    uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    component_id: sdc.flexus.footer
+    component_version: d696cea1796b650e
+    inputs:
+      align: true
+  a1b2c3d4-e5f6-7890-abcd-ef1234567890:
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_first
+    uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    component_id: sdc.flexus.group
+    component_version: 5b8517841c0015ea
+    inputs:
+      flex_direction: row
+      flex_gap: md
+      items_align: start
+      flex_align: start
+  bf10b7a6-7a11-429b-a23a-4ab88fc1f34c:
+    parent_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    slot: group_slot
+    uuid: bf10b7a6-7a11-429b-a23a-4ab88fc1f34c
+    component_id: sdc.flexus.icon
+    component_version: 3562ab5d8550c890
+    inputs:
+      icon: facebook-logo
+      icon_size: medium
+      url: 'https://www.facebook.com'
+  4fb10949-e4fa-475e-8a72-15c958b7273c:
+    parent_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    slot: group_slot
+    uuid: 4fb10949-e4fa-475e-8a72-15c958b7273c
+    component_id: sdc.flexus.icon
+    component_version: 3562ab5d8550c890
+    inputs:
+      icon: linkedin-logo
+      icon_size: medium
+      url: 'https://www.linkedin.com'
+  5c5858de-1fd9-4069-a43b-d3966f47f4cb:
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_utility_first
+    uuid: 5c5858de-1fd9-4069-a43b-d3966f47f4cb
+    component_id: block.system_menu_block.footer
+    component_version: 075503dbc228a45c
+    inputs:
+      label: Footer
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: false
+  98ac96c2-3f74-467f-be72-c0c4f1b19aba:
+    parent_uuid: 4bb686aa-1718-4ea4-a66b-b4860be8818e
+    slot: footer_utility_last
+    uuid: 98ac96c2-3f74-467f-be72-c0c4f1b19aba
+    component_id: sdc.flexus.text
+    component_version: 3443cdaa2ab72bec
+    inputs:
+      text: '© 2026 Apex Digital Marketing. All rights reserved.'
+      text_size: text-sm
+      text_color: default

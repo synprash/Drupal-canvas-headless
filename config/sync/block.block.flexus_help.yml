@@ -1,0 +1,22 @@
+uuid: b8c27612-4a8f-48ed-89e0-6722f82f0257
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - flexus
+_core:
+  default_config_hash: Ps3y_46g1_RsBrYbx117nki05y0sPM7h9iSpbDl4oxY
+id: flexus_help
+theme: flexus
+region: content
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

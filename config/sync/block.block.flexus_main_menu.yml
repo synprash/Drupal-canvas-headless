@@ -1,0 +1,27 @@
+uuid: 06322295-94e1-41ea-83b9-9285542ce857
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - flexus
+_core:
+  default_config_hash: f02D5uA5doCdjEA9xfYk05-cQAtlvKdt3EMlAtGVchk
+id: flexus_main_menu
+theme: flexus
+region: header
+weight: 1
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,20 @@
+uuid: 283930db-49fe-414e-bb38-11d0f71547b3
+langcode: en
+status: true
+dependencies:
+  theme:
+    - flexus
+_core:
+  default_config_hash: 4l30mMZmvM2yQNbwizfd8sr989oMsWqty4zk0aKCZKE
+id: flexus_primary_admin_actions
+theme: flexus
+region: content
+weight: -6
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

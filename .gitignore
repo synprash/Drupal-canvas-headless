@@ -1,0 +1,37 @@
+# Composer vendor directory
+/vendor/
+
+# Drupal core, contrib packages, and scaffolded assets
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/libraries/
+/drush/Commands/contrib/
+/web/autoload.php
+/web/index.php
+/web/update.php
+/web/robots.txt
+
+# Drupal site files and local overrides
+/web/sites/*/files/
+/web/sites/*/settings.local.php
+/web/sites/*/services.local.yml
+/web/sites/simpletest/
+
+# Environment files and local Lerd configs
+.env
+.env.*
+!.env.example
+.lerd.local.yaml
+.env.lerd_override
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/
+.cursor/
+.gemini/
+.junie/

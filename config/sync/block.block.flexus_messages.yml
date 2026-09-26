@@ -1,0 +1,22 @@
+uuid: b0ca6556-e616-431f-b04a-fbf2c5a93f27
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - flexus
+_core:
+  default_config_hash: BFxDrr83PvaRGe8T-TtlDjy-u70eO58oKqOGtLCj2Uo
+id: flexus_messages
+theme: flexus
+region: content
+weight: -10
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

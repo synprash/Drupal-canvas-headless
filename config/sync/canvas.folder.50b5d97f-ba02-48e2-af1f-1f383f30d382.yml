@@ -1,0 +1,11 @@
+uuid: 50b5d97f-ba02-48e2-af1f-1f383f30d382
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.flexus.taxonomy-links
+name: Content
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.flexus.taxonomy-links

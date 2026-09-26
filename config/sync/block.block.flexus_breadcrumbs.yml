@@ -1,0 +1,22 @@
+uuid: 60a7b845-5dea-4b8d-8275-6d081e11af4d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - flexus
+_core:
+  default_config_hash: TFLvt_pA01XsZFBK5HpnVfBwimlLUoNKOhlnvyWoevE
+id: flexus_breadcrumbs
+theme: flexus
+region: content
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,19 @@
+uuid: 301a89f7-2e2e-42df-9e3e-52bcec75094a
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.flexus.card
+    - canvas.component.sdc.flexus.card-icon
+    - canvas.component.sdc.flexus.card-logo
+    - canvas.component.sdc.flexus.card-pricing
+    - canvas.component.sdc.flexus.card-testimonial
+name: Card
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.flexus.card
+  - sdc.flexus.card-icon
+  - sdc.flexus.card-logo
+  - sdc.flexus.card-pricing
+  - sdc.flexus.card-testimonial

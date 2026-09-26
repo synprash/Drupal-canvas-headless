@@ -1,0 +1,22 @@
+uuid: c49f7200-df90-43fc-88b2-5196b067ba81
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - flexus
+_core:
+  default_config_hash: MbT_TvKit-mEGy5S6F0wYcHmtsb1Z89lLaRmBFkH8T8
+id: flexus_content
+theme: flexus
+region: content
+weight: 10
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

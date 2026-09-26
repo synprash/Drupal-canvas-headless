@@ -1,0 +1,13 @@
+domains:
+  - drupal-lerd
+php_version: "8.5"
+framework: drupal
+framework_version: "11"
+secured: true
+services:
+  - mailpit
+  - meilisearch
+  - mysql
+  - redis
+workers:
+  - cron

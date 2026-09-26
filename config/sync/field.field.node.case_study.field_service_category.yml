@@ -1,0 +1,24 @@
+uuid: d71dc505-c80d-4aa9-b266-2c8f0e72b821
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_category
+    - node.type.case_study
+    - taxonomy.vocabulary.service_category
+id: node.case_study.field_service_category
+field_name: field_service_category
+entity_type: node
+bundle: case_study
+label: 'Service Category'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      service_category: service_category
+field_type: entity_reference

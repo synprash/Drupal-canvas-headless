@@ -1,0 +1,9 @@
+services:
+  apex_core.twig_extension:
+    class: Drupal\apex_core\Template\TwigExtension
+    tags:
+      - { name: twig.extension }
+  apex_core.cva_twig_extension:
+    class: Drupal\apex_core\Template\SafeCvaTwigExtension
+    decorates: cva.twig_extension
+    public: false

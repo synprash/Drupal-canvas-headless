@@ -1,0 +1,17 @@
+uuid: 47c306c2-ee18-4939-87d8-21c24c8ae813
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.flexus.cta
+    - canvas.component.sdc.flexus.hero-billboard
+    - canvas.component.sdc.flexus.hero-blog
+    - canvas.component.sdc.flexus.hero-side-by-side
+name: Hero
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.flexus.cta
+  - sdc.flexus.hero-billboard
+  - sdc.flexus.hero-blog
+  - sdc.flexus.hero-side-by-side

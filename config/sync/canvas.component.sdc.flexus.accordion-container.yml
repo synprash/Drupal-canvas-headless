@@ -1,0 +1,21 @@
+uuid: 37c6fb77-eddd-4ae9-b018-388006168784
+langcode: en
+status: true
+dependencies:
+  theme:
+    - flexus
+active_version: 6d6367123c15a82a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }
+    fallback_metadata:
+      slot_definitions:
+        accordion_content:
+          title: 'Accordion content'
+          description: 'Only one of collapsible sections added can be open at a time.'
+label: 'Accordion container'
+id: sdc.flexus.accordion-container
+provider: flexus
+source: sdc
+source_local_id: 'flexus:accordion-container'

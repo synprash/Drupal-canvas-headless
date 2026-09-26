@@ -1,0 +1,12 @@
+uuid: e6d3d1d1-4e7c-4bf2-92c1-c5cc507ecb24
+langcode: en
+status: true
+dependencies: {  }
+id: feedback
+label: 'Growth Strategy Consultation'
+recipients:
+  - growth@apexdigital.example
+reply: ''
+weight: 0
+message: 'Thank you for reaching out to Apex Digital. A growth strategist will review your inquiry and get back to you within 4 business hours.'
+redirect: null

@@ -1,0 +1,22 @@
+uuid: 610cb78b-a721-4eed-b874-9bf392f10798
+langcode: en
+status: true
+dependencies:
+  theme:
+    - flexus
+_core:
+  default_config_hash: 70SwmE_M0VxaanjejW15ZrJnyAQIzVUXu1pd48hElwg
+id: flexus_secondary_local_tasks
+theme: flexus
+region: content
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

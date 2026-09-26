@@ -1,0 +1,5 @@
+name: 'Apex Core'
+type: module
+description: 'Core functionality and Twig compatibility bridges for Apex Digital Marketing.'
+core_version_requirement: ^11
+package: Custom

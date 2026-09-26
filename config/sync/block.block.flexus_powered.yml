@@ -1,0 +1,22 @@
+uuid: ca2fb5c8-0b3c-460d-8a3b-11855c7ecbd8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - flexus
+_core:
+  default_config_hash: Q25Rf_J9DyVUkf6lFbvUiKE43f2YQzfqy7pSnCyD1ws
+id: flexus_powered
+theme: flexus
+region: footer
+weight: 1
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

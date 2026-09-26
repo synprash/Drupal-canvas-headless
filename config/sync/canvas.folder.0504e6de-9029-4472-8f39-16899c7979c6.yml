@@ -1,0 +1,25 @@
+uuid: 0504e6de-9029-4472-8f39-16899c7979c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.flexus.anchor
+    - canvas.component.sdc.flexus.badge
+    - canvas.component.sdc.flexus.blockquote
+    - canvas.component.sdc.flexus.button
+    - canvas.component.sdc.flexus.heading
+    - canvas.component.sdc.flexus.icon
+    - canvas.component.sdc.flexus.image
+    - canvas.component.sdc.flexus.text
+name: Base
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.flexus.anchor
+  - sdc.flexus.badge
+  - sdc.flexus.blockquote
+  - sdc.flexus.button
+  - sdc.flexus.heading
+  - sdc.flexus.icon
+  - sdc.flexus.image
+  - sdc.flexus.text

@@ -1,0 +1,113 @@
+uuid: d4b43290-8e91-45ec-92b3-2a613a4b6936
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.marker.page_content
+    - canvas.component.sdc.flexus.card-icon
+    - canvas.component.sdc.flexus.card-testimonial
+    - canvas.component.sdc.flexus.cta
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: template1
+label: Template1
+description: ''
+component_tree:
+  df47dfd4-5f48-4fa7-95a9-a3004b3a2621:
+    uuid: df47dfd4-5f48-4fa7-95a9-a3004b3a2621
+    component_id: sdc.flexus.cta
+    component_version: 97e8601e229cfff3
+    inputs:
+      heading_text: 'Your heading goes here'
+      level: '2'
+      text: 'Lorem ipsum dolor sit amet.'
+      text_align: center
+  6ec715d5-a908-490a-aded-0aa941a4c2dc:
+    uuid: 6ec715d5-a908-490a-aded-0aa941a4c2dc
+    component_id: marker.page_content
+    component_version: 3b12c0b99a6caecc
+    inputs: {  }
+  91f635c9-a484-497a-83b2-2f31e3bd149b:
+    uuid: 91f635c9-a484-497a-83b2-2f31e3bd149b
+    component_id: sdc.flexus.card-testimonial
+    component_version: 0b5231de8ec43e9a
+    inputs:
+      text: 'My career’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.'
+      cite_name: 'Isiah Julio'
+      cite_text: 'Engineer, Technical Services'
+      align: center
+      style: default
+      media:
+        sourceType: default-relative-url
+        value:
+          src: assets/portrait.png
+          alt: Placeholder
+          width: 100
+          height: 100
+        jsonSchema:
+          type: object
+          properties:
+            src:
+              type: string
+              contentMediaType: 'image/*'
+              format: uri-reference
+              x-allowed-schemes:
+                - http
+                - https
+            alt:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+          required:
+            - src
+        componentId: sdc.flexus.card-testimonial
+      show_media: true
+  2122cbf6-0971-4766-aaca-5c3f6b423114:
+    uuid: 2122cbf6-0971-4766-aaca-5c3f6b423114
+    component_id: sdc.flexus.card-icon
+    component_version: 002e9ffe10816cfb
+    inputs:
+      tile_size: square
+      border_radius: medium
+      icon: rocket
+      icon_size: large
+      icon_align: center
+      text: 'Your heading here'
+      description:
+        value: '<p>This is placeholder text.</p>'
+        format: canvas_html_block
+      text_align: center
+  dc80a461-2aee-4013-808a-985a0e4c2f42:
+    uuid: dc80a461-2aee-4013-808a-985a0e4c2f42
+    component_id: sdc.flexus.card-icon
+    component_version: 002e9ffe10816cfb
+    inputs:
+      tile_size: square
+      border_radius: medium
+      icon: rocket
+      icon_size: large
+      icon_align: center
+      text: 'Your heading here'
+      description:
+        value: '<p>This is placeholder text.</p>'
+        format: canvas_html_block
+      text_align: center
+  33982e4e-8402-49c8-b5da-3513054e3424:
+    uuid: 33982e4e-8402-49c8-b5da-3513054e3424
+    component_id: sdc.flexus.card-icon
+    component_version: 002e9ffe10816cfb
+    inputs:
+      tile_size: square
+      border_radius: medium
+      icon: rocket
+      icon_size: large
+      icon_align: center
+      text: 'Your heading here'
+      description:
+        value: '<p>This is placeholder text.</p>'
+        format: canvas_html_block
+      text_align: center

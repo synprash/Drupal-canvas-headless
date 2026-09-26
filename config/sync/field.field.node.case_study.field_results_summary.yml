@@ -1,0 +1,19 @@
+uuid: 549b1da1-1b0e-4788-887d-617981dc14ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_results_summary
+    - node.type.case_study
+id: node.case_study.field_results_summary
+field_name: field_results_summary
+entity_type: node
+bundle: case_study
+label: 'Results Summary'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

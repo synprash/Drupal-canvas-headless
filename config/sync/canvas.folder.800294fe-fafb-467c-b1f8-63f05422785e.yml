@@ -1,0 +1,15 @@
+uuid: 800294fe-fafb-467c-b1f8-63f05422785e
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.search_form_block
+    - canvas.component.block.user_login_block
+    - canvas.component.sdc.flexus.form
+name: Forms
+configEntityTypeId: component
+weight: 0
+items:
+  - block.search_form_block
+  - block.user_login_block
+  - sdc.flexus.form

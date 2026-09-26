@@ -1,0 +1,33 @@
+_core:
+  default_config_hash: ZS8NbZCkRlrzTO6HKE13Sxsgx2mNd0vaMJYQEiWwU8k
+favicon:
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  use_default: true
+scheme: light
+color_palette: earth
+custom_palette_colors:
+  light:
+    primary: '#3b82f6'
+    primary-foreground: '#ffffff'
+    secondary: '#f3f4f6'
+    secondary-foreground: '#1f2937'
+    accent: '#e0e7ff'
+    accent-foreground: '#3730a3'
+    muted: '#f9fafb'
+    muted-foreground: '#6b7280'
+  dark:
+    primary: '#60a5fa'
+    primary-foreground: '#1f2937'
+    secondary: '#374151'
+    secondary-foreground: '#f9fafb'
+    accent: '#6366f1'
+    accent-foreground: '#ffffff'
+    muted: '#1f2937'
+    muted-foreground: '#d1d5db'
+font_family: outfit

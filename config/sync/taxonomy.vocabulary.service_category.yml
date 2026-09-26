@@ -1,0 +1,9 @@
+uuid: f86e12d3-cc85-435a-9567-0c3f63f9875e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Service Category'
+vid: service_category
+description: 'Categories of digital marketing services provided by Apex Digital'
+weight: 0
+new_revision: false
