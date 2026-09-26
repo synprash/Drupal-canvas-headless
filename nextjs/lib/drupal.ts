@@ -88,128 +88,423 @@ function fetchFromDrupal(endpoint: string): Promise<any> {
   });
 }
 
-// Fallback Canvas Component Trees for complete offline/decoupled resilience
+// Fallback Canvas Component Trees matching Drupal Canvas configuration exactly
 const FALLBACK_PAGES: Record<string, CanvasPageData> = {
   '/': {
     id: 'canvas-home',
     title: 'Home',
     path: '/',
     component_tree: {
-      'hero-1': {
-        uuid: 'hero-1',
+      'home-1': {
+        uuid: 'home-1',
         component_id: 'sdc.flexus.hero-side-by-side',
         inputs: {
-          eyebrow: 'Leading Digital Marketing Agency',
-          heading: 'Engineered for Hyper-Growth & Market Leadership',
-          summary: 'We combine predictive AI analytics, enterprise full-funnel CRO, and precision performance media to scale ambitious B2B & direct-to-consumer brands.',
+          eyebrow: 'Leading Growth Marketing Agency',
+          media: {
+            src: '/themes/contrib/flexus/components/hero-side-by-side/assets/boliviainteligente-QPu42AAJ5ZY-unsplash.jpg',
+            alt: 'Apex Digital Growth Marketing & Analytics Platform',
+          },
         },
         parent_uuid: null,
         slot: null,
       },
-      'btn-1': {
-        uuid: 'btn-1',
+      'home-2': {
+        uuid: 'home-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'Accelerate Growth with Data-Driven Digital Marketing',
+          level: 1,
+          text: 'Apex Digital scales high-growth B2B and eCommerce brands with precision SEO, high-ROI paid media, and conversion rate optimization.',
+          text_align: 'left',
+        },
+        parent_uuid: 'home-1',
+        slot: 'hero_slot',
+      },
+      'home-3': {
+        uuid: 'home-3',
         component_id: 'sdc.flexus.button',
-        inputs: { text: 'Claim Growth Audit', href: '/contact', variant: 'primary' },
-        parent_uuid: 'hero-1',
+        inputs: {
+          label: 'Get Free Growth Audit',
+          href: '/contact',
+          variant: 'primary',
+        },
+        parent_uuid: 'home-2',
         slot: 'actions',
       },
-      'btn-2': {
-        uuid: 'btn-2',
+      'home-4': {
+        uuid: 'home-4',
         component_id: 'sdc.flexus.button',
-        inputs: { text: 'Explore Services', href: '/services', variant: 'secondary' },
-        parent_uuid: 'hero-1',
+        inputs: {
+          label: 'Explore Case Studies',
+          href: '/case-studies',
+          variant: 'secondary',
+        },
+        parent_uuid: 'home-2',
         slot: 'actions',
       },
-      'stats-section': {
-        uuid: 'stats-section',
+      'home-stats-sec': {
+        uuid: 'home-stats-sec',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '25-25-25-25' },
         parent_uuid: null,
         slot: null,
       },
-      'stat-1': {
-        uuid: 'stat-1',
+      'home-stat-1': {
+        uuid: 'home-stat-1',
         component_id: 'sdc.apex_theme.stat-counter',
-        inputs: { prefix: '$', number: '140M+', label: 'Client Revenue Generated', description: 'Across enterprise search & paid media' },
-        parent_uuid: 'stats-section',
+        inputs: { prefix: '$', number: '140M+', label: 'Client Revenue Generated', description: 'Across search & paid media' },
+        parent_uuid: 'home-stats-sec',
         slot: 'main_slot',
       },
-      'stat-2': {
-        uuid: 'stat-2',
+      'home-stat-2': {
+        uuid: 'home-stat-2',
         component_id: 'sdc.apex_theme.stat-counter',
         inputs: { prefix: '+', number: '340%', label: 'Avg ROAS Increase', description: 'Over baseline in first 90 days' },
-        parent_uuid: 'stats-section',
+        parent_uuid: 'home-stats-sec',
         slot: 'main_slot',
       },
-      'stat-3': {
-        uuid: 'stat-3',
+      'home-stat-3': {
+        uuid: 'home-stat-3',
         component_id: 'sdc.apex_theme.stat-counter',
-        inputs: { prefix: '', number: '99.4%', label: 'Client Retention Rate', description: 'Industry benchmark performance' },
-        parent_uuid: 'stats-section',
+        inputs: { prefix: '', number: '98%', label: 'Client Retention Rate', description: 'Industry benchmark performance' },
+        parent_uuid: 'home-stats-sec',
         slot: 'main_slot',
       },
-      'stat-4': {
-        uuid: 'stat-4',
+      'home-stat-4': {
+        uuid: 'home-stat-4',
         component_id: 'sdc.apex_theme.stat-counter',
-        inputs: { prefix: '', number: '45+', label: 'Global Industry Awards', description: 'Search, CRO & Design accolades' },
-        parent_uuid: 'stats-section',
+        inputs: { prefix: '', number: '45+', label: 'Industry Awards', description: 'Search & CRO accolades' },
+        parent_uuid: 'home-stats-sec',
         slot: 'main_slot',
       },
-      'services-section': {
-        uuid: 'services-section',
+      'home-10': {
+        uuid: 'home-10',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '33-33-33' },
         parent_uuid: null,
         slot: null,
       },
-      'card-1': {
-        uuid: 'card-1',
+      'home-11': {
+        uuid: 'home-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Full-Funnel Growth Services',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'home-10',
+        slot: 'header_slot',
+      },
+      'home-12': {
+        uuid: 'home-12',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Technical & Generative SEO',
-          summary: 'Dominate organic search with structured semantic architecture, programmatic landing pages, and AI engine optimization.',
-          href: '/services',
+          heading_text: 'Search Engine Optimization',
+          text: 'Dominate organic search with technical architecture audits, programmatic keyword strategies, and high-authority link acquisition that compounds over time.',
+          url: '/services',
         },
-        parent_uuid: 'services-section',
+        parent_uuid: 'home-10',
         slot: 'main_slot',
       },
-      'card-2': {
-        uuid: 'card-2',
+      'home-13': {
+        uuid: 'home-13',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Performance Paid Media',
-          summary: 'Algorithmic multi-channel paid acquisition across Google Ads, Meta, LinkedIn, and programmatic DSP networks.',
-          href: '/services',
+          heading_text: 'Performance Paid Advertising',
+          text: 'Maximize return on ad spend (ROAS) across Google Ads, Meta, and LinkedIn with algorithmic bidding, dynamic retargeting, and continuous creative testing.',
+          url: '/services',
         },
-        parent_uuid: 'services-section',
+        parent_uuid: 'home-10',
         slot: 'main_slot',
       },
-      'card-3': {
-        uuid: 'card-3',
+      'home-14': {
+        uuid: 'home-14',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Conversion Rate Optimization (CRO)',
-          summary: 'Turn traffic into compounding revenue through rapid multivariate experimentation, friction auditing, and heatmap analysis.',
-          href: '/services',
+          heading_text: 'Conversion Rate Optimization (CRO)',
+          text: 'Transform existing traffic into pipeline and revenue with multivariate A/B testing, friction auditing, heatmaps, and psychological conversion design.',
+          url: '/services',
         },
-        parent_uuid: 'services-section',
+        parent_uuid: 'home-10',
         slot: 'main_slot',
       },
-      'cta-home': {
-        uuid: 'cta-home',
+      'home-30': {
+        uuid: 'home-30',
+        component_id: 'sdc.flexus.section',
+        inputs: { columns: '50-50' },
+        parent_uuid: null,
+        slot: null,
+      },
+      'home-31': {
+        uuid: 'home-31',
+        component_id: 'sdc.flexus.heading',
+        inputs: { heading_text: 'What Growth Leaders Say', level: 2, align: 'center' },
+        parent_uuid: 'home-30',
+        slot: 'header_slot',
+      },
+      'home-32': {
+        uuid: 'home-32',
+        component_id: 'sdc.flexus.card-testimonial',
+        inputs: {
+          text: 'Apex Digital transformed our customer acquisition economics. Our sales pipeline surged by 340% within 9 months, and our blended CAC dropped by over 60%.',
+          cite_name: 'David Vance',
+          cite_text: 'VP of Growth, TechFlow Cloud',
+        },
+        parent_uuid: 'home-30',
+        slot: 'main_slot',
+      },
+      'home-33': {
+        uuid: 'home-33',
+        component_id: 'sdc.flexus.card-testimonial',
+        inputs: {
+          text: 'The most analytical, transparent agency we have partnered with. They scaled our eCommerce ROAS from 2.1x to 5.4x while tripling our monthly ad spend profitably.',
+          cite_name: 'Elena Rostova',
+          cite_text: 'CMO, LuxeAura Retail',
+        },
+        parent_uuid: 'home-30',
+        slot: 'main_slot',
+      },
+      'home-40': {
+        uuid: 'home-40',
+        component_id: 'sdc.flexus.section',
+        inputs: { columns: '33-33-33', background_color: 'muted' },
+        parent_uuid: null,
+        slot: null,
+      },
+      'home-41': {
+        uuid: 'home-41',
+        component_id: 'sdc.flexus.heading',
+        inputs: { heading_text: 'Transparent Growth Retainers', level: 2, align: 'center' },
+        parent_uuid: 'home-40',
+        slot: 'header_slot',
+      },
+      'home-42': {
+        uuid: 'home-42',
+        component_id: 'sdc.flexus.card-pricing',
+        inputs: {
+          heading_text: 'Starter Growth',
+          description: 'Ideal for scaling startups and established SMBs looking to build organic authority.',
+          price: '2,500',
+          currency_symbol: '$',
+          text: '<ul><li>Full Technical SEO Audit</li><li>Monthly Content Publishing Sprint</li><li>Keyword Tracking & Intelligence</li><li>Monthly Performance Review</li></ul>',
+          button_label: 'Get Started',
+          button_url: '/contact',
+          promote: false,
+        },
+        parent_uuid: 'home-40',
+        slot: 'main_slot',
+      },
+      'home-43': {
+        uuid: 'home-43',
+        component_id: 'sdc.flexus.card-pricing',
+        inputs: {
+          heading_text: 'Scale Engine',
+          description: 'Our flagship growth package combining SEO, Performance PPC, and CRO.',
+          price: '5,500',
+          currency_symbol: '$',
+          text: '<ul><li>Omnichannel Google & Meta Ad Management</li><li>High-Intent SEO & Programmatic Content</li><li>Bi-Weekly Multivariate CRO Testing</li><li>Dedicated Growth Strategist & Slack</li></ul>',
+          button_label: 'Scale With Us',
+          button_url: '/contact',
+          promote: true,
+        },
+        parent_uuid: 'home-40',
+        slot: 'main_slot',
+      },
+      'home-44': {
+        uuid: 'home-44',
+        component_id: 'sdc.flexus.card-pricing',
+        inputs: {
+          heading_text: 'Enterprise Suite',
+          description: 'Full-service digital marketing partner for market leaders and high-volume brands.',
+          price: '9,500',
+          currency_symbol: '$',
+          text: '<ul><li>Complete Full-Funnel Growth Management</li><li>Custom Landing Page Design & Engineering</li><li>Real-time BI Dashboard & Attribution</li><li>Weekly Strategy Sessions</li></ul>',
+          button_label: 'Contact Enterprise',
+          button_url: '/contact',
+          promote: false,
+        },
+        parent_uuid: 'home-40',
+        slot: 'main_slot',
+      },
+      'home-50': {
+        uuid: 'home-50',
+        component_id: 'sdc.flexus.section',
+        inputs: { columns: '100' },
+        parent_uuid: null,
+        slot: null,
+      },
+      'home-51': {
+        uuid: 'home-51',
+        component_id: 'sdc.flexus.heading',
+        inputs: { heading_text: 'Frequently Asked Questions', level: 2, align: 'center' },
+        parent_uuid: 'home-50',
+        slot: 'header_slot',
+      },
+      'home-52': {
+        uuid: 'home-52',
+        component_id: 'sdc.flexus.accordion-container',
+        inputs: {},
+        parent_uuid: 'home-50',
+        slot: 'main_slot',
+      },
+      'home-faq-1': {
+        uuid: 'home-faq-1',
+        component_id: 'sdc.flexus.accordion',
+        inputs: {
+          title: 'How soon can we expect to see results?',
+          content: 'For Performance Paid Media, initial optimization gains and positive ROAS improvements typically occur within the first 14 to 30 days. For SEO and organic inbound strategies, compounding traffic and ranking gains become significant within 3 to 6 months.',
+          open_by_default: true,
+        },
+        parent_uuid: 'home-52',
+        slot: 'accordion_content',
+      },
+      'home-faq-2': {
+        uuid: 'home-faq-2',
+        component_id: 'sdc.flexus.accordion',
+        inputs: {
+          title: 'What makes Apex Digital different from typical agencies?',
+          content: 'We eliminate vanity metrics like impressions or clicks. We focus strictly on revenue attribution, pipeline velocity, customer lifetime value, and cash-flow positive returns on ad spend with 100% transparent reporting.',
+        },
+        parent_uuid: 'home-52',
+        slot: 'accordion_content',
+      },
+      'home-faq-3': {
+        uuid: 'home-faq-3',
+        component_id: 'sdc.flexus.accordion',
+        inputs: {
+          title: 'Do you require long-term contracts?',
+          content: 'We operate on initial 90-day onboarding terms followed by flexible month-to-month retainers. Our 98% retention rate is earned through ongoing performance, not locked-in restrictive contracts.',
+        },
+        parent_uuid: 'home-52',
+        slot: 'accordion_content',
+      },
+      'home-80': {
+        uuid: 'home-80',
         component_id: 'sdc.flexus.cta',
         inputs: {
-          heading: 'Ready to Accelerate Your Customer Acquisition?',
-          summary: 'Partner with Apex Digital to transform your digital presence into a scalable revenue pipeline.',
+          heading_text: 'Ready to Dominate Your Market?',
+          level: 2,
+          text: 'Request a custom growth audit today. Our strategists will identify conversion bottlenecks and untapped acquisition opportunities.',
+          text_align: 'center',
         },
         parent_uuid: null,
         slot: null,
       },
-      'cta-btn': {
-        uuid: 'cta-btn',
+      'home-81': {
+        uuid: 'home-81',
         component_id: 'sdc.flexus.button',
-        inputs: { text: 'Schedule Strategy Session', href: '/contact', variant: 'primary' },
-        parent_uuid: 'cta-home',
+        inputs: {
+          label: 'Schedule Strategy Call',
+          href: '/contact',
+          variant: 'primary',
+        },
+        parent_uuid: 'home-80',
+        slot: 'actions',
+      },
+    },
+  },
+  '/case-studies': {
+    id: 'canvas-case-studies',
+    title: 'Case Studies',
+    path: '/case-studies',
+    component_tree: {
+      'cs-1': {
+        uuid: 'cs-1',
+        component_id: 'sdc.flexus.hero-side-by-side',
+        inputs: {
+          eyebrow: 'Proven Track Record',
+          media: {
+            src: '/themes/contrib/flexus/components/image/assets/pexels-felix-mittermeier-1209650.jpg',
+            alt: 'Proven Client Case Studies and ROI',
+          },
+        },
+        parent_uuid: null,
+        slot: null,
+      },
+      'cs-2': {
+        uuid: 'cs-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'Client Case Studies & Growth Highlights',
+          level: 1,
+          text: 'Discover how Apex Digital partners with industry leaders to unlock scalable acquisition engines and generate millions in incremental revenue.',
+          text_align: 'left',
+        },
+        parent_uuid: 'cs-1',
+        slot: 'hero_slot',
+      },
+      'cs-10': {
+        uuid: 'cs-10',
+        component_id: 'sdc.flexus.section',
+        inputs: { columns: '33-33-33' },
+        parent_uuid: null,
+        slot: null,
+      },
+      'cs-11': {
+        uuid: 'cs-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Featured Client Success Stories',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'cs-10',
+        slot: 'header_slot',
+      },
+      'cs-12': {
+        uuid: 'cs-12',
+        component_id: 'sdc.flexus.card',
+        inputs: {
+          heading_text: 'TechFlow SaaS: +340% Pipeline Growth',
+          text: 'Scaled enterprise B2B inbound demos via programmatic content clusters, technical SEO restructuring, and high-tier PR link building.',
+          url: '/contact',
+        },
+        parent_uuid: 'cs-10',
+        slot: 'main_slot',
+      },
+      'cs-13': {
+        uuid: 'cs-13',
+        component_id: 'sdc.flexus.card',
+        inputs: {
+          heading_text: 'LuxeAura Retail: 5.4x Omnichannel ROAS',
+          text: 'Revitalized multi-channel paid acquisition across Meta & Google Ads while scaling monthly ad spend 4x profitably.',
+          url: '/contact',
+        },
+        parent_uuid: 'cs-10',
+        slot: 'main_slot',
+      },
+      'cs-14': {
+        uuid: 'cs-14',
+        component_id: 'sdc.flexus.card',
+        inputs: {
+          heading_text: 'FinEdge Capital: +180% Form Conversions',
+          text: 'Diagnosed application drop-off and re-architected loan application UX, dropping abandonment from 82% to 28%.',
+          url: '/contact',
+        },
+        parent_uuid: 'cs-10',
+        slot: 'main_slot',
+      },
+      'cs-20': {
+        uuid: 'cs-20',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'Become Our Next Success Story',
+          level: 2,
+          text: 'Our senior team is ready to analyze your growth levers and formulate your custom expansion roadmap.',
+          text_align: 'center',
+        },
+        parent_uuid: null,
+        slot: null,
+      },
+      'cs-21': {
+        uuid: 'cs-21',
+        component_id: 'sdc.flexus.button',
+        inputs: {
+          label: 'Request Growth Audit',
+          href: '/contact',
+          variant: 'primary',
+        },
+        parent_uuid: 'cs-20',
         slot: 'actions',
       },
     },
@@ -219,101 +514,126 @@ const FALLBACK_PAGES: Record<string, CanvasPageData> = {
     title: 'Services',
     path: '/services',
     component_tree: {
-      'hero-services': {
-        uuid: 'hero-services',
+      'srv-1': {
+        uuid: 'srv-1',
         component_id: 'sdc.flexus.hero-side-by-side',
         inputs: {
-          eyebrow: 'Full-Funnel Capabilities',
-          heading: 'Growth Disciplines Designed for Market Dominance',
-          summary: 'From deep technical SEO and search visibility to high-velocity conversion testing and precision paid campaigns.',
+          eyebrow: 'Our Core Offerings',
+          media: {
+            src: '/themes/contrib/flexus/components/card/assets/jj-ying-8bghKxNU1j0-unsplash.jpg',
+            alt: 'Full-Funnel Digital Marketing Disciplines',
+          },
         },
         parent_uuid: null,
         slot: null,
       },
-      'grid-services': {
-        uuid: 'grid-services',
+      'srv-2': {
+        uuid: 'srv-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'Our Growth Capabilities & Specializations',
+          level: 1,
+          text: 'From high-intent organic search to multi-channel paid acquisition, our end-to-end services are designed for measurable pipeline and revenue growth.',
+          text_align: 'left',
+        },
+        parent_uuid: 'srv-1',
+        slot: 'hero_slot',
+      },
+      'srv-3': {
+        uuid: 'srv-3',
+        component_id: 'sdc.flexus.button',
+        inputs: {
+          label: 'Book a Growth Consultation',
+          href: '/contact',
+          variant: 'primary',
+        },
+        parent_uuid: 'srv-2',
+        slot: 'actions',
+      },
+      'srv-10': {
+        uuid: 'srv-10',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '50-50' },
         parent_uuid: null,
         slot: null,
       },
-      'svc-1': {
-        uuid: 'svc-1',
+      'srv-11': {
+        uuid: 'srv-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Specialized Disciplines',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'srv-10',
+        slot: 'header_slot',
+      },
+      'srv-12': {
+        uuid: 'srv-12',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Enterprise Technical SEO',
-          summary: 'Core Web Vitals tuning, crawl budget optimization, faceted navigation engineering, and rich schema markup.',
-          href: '/contact',
+          heading_text: 'Technical & Strategic SEO',
+          text: 'Core web vitals optimization, structured data schemas, programmatic content architecture, and authority backlink building to outrank industry rivals.',
+          url: '/contact',
         },
-        parent_uuid: 'grid-services',
+        parent_uuid: 'srv-10',
         slot: 'main_slot',
       },
-      'svc-2': {
-        uuid: 'svc-2',
+      'srv-13': {
+        uuid: 'srv-13',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Omnichannel Paid Media & Social',
-          summary: 'Hyper-targeted bidding algorithms, creative sprint testing, lookalike modeling, and attribution modeling.',
-          href: '/contact',
+          heading_text: 'Performance Paid Media',
+          text: 'High-precision Google Search, Performance Max, Meta Ads, and LinkedIn B2B ad buying backed by granular ROAS and multi-touch attribution.',
+          url: '/contact',
         },
-        parent_uuid: 'grid-services',
+        parent_uuid: 'srv-10',
         slot: 'main_slot',
       },
-      'svc-3': {
-        uuid: 'svc-3',
+      'srv-14': {
+        uuid: 'srv-14',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Scientific Conversion Rate Optimization',
-          summary: 'Statistical A/B and multivariate tests, behavioral click tracking, checkout funnel streamlining, and qualitative research.',
-          href: '/contact',
+          heading_text: 'Conversion Rate Optimization (CRO)',
+          text: 'Data-driven UX audits, heatmapping analysis, multivariate landing page experiments, and frictionless checkout optimization that elevates conversion rates.',
+          url: '/contact',
         },
-        parent_uuid: 'grid-services',
+        parent_uuid: 'srv-10',
         slot: 'main_slot',
       },
-      'svc-4': {
-        uuid: 'svc-4',
+      'srv-15': {
+        uuid: 'srv-15',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Strategic Content Marketing & PR',
-          summary: 'High-authority digital PR, link earning, thought leadership publishing, and content hub architecture.',
-          href: '/contact',
+          heading_text: 'Content Strategy & Copywriting',
+          text: 'Authoritative thought leadership, conversion-focused sales copy, interactive calculators, and whitepapers that establish undeniable brand authority.',
+          url: '/contact',
         },
-        parent_uuid: 'grid-services',
+        parent_uuid: 'srv-10',
         slot: 'main_slot',
       },
-      'faq-section': {
-        uuid: 'faq-section',
-        component_id: 'sdc.flexus.section',
-        inputs: { columns: '100' },
+      'srv-20': {
+        uuid: 'srv-20',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: "Let's Build a Custom Scope for Your Brand",
+          level: 2,
+          text: 'Schedule a strategy discovery call with our directors to explore tailored growth packages.',
+          text_align: 'center',
+        },
         parent_uuid: null,
         slot: null,
       },
-      'faq-container': {
-        uuid: 'faq-container',
-        component_id: 'sdc.flexus.accordion-container',
-        inputs: {},
-        parent_uuid: 'faq-section',
-        slot: 'main_slot',
-      },
-      'faq-1': {
-        uuid: 'faq-1',
-        component_id: 'sdc.flexus.accordion',
+      'srv-21': {
+        uuid: 'srv-21',
+        component_id: 'sdc.flexus.button',
         inputs: {
-          title: 'How quickly do we see results from campaigns?',
-          content: 'Paid media channels demonstrate positive ROAS lift within 14 to 30 days. Organic technical SEO and content compounding generally yield significant market share gains between months 2 and 6.',
+          label: 'Get in Touch',
+          href: '/contact',
+          variant: 'primary',
         },
-        parent_uuid: 'faq-container',
-        slot: 'accordion_content',
-      },
-      'faq-2': {
-        uuid: 'faq-2',
-        component_id: 'sdc.flexus.accordion',
-        inputs: {
-          title: 'Do you offer dedicated account pods?',
-          content: 'Yes. Every client is paired with a dedicated Growth Pod comprising a Senior Strategist, Technical Lead, Creative Producer, and Data Analyst.',
-        },
-        parent_uuid: 'faq-container',
-        slot: 'accordion_content',
+        parent_uuid: 'srv-20',
+        slot: 'actions',
       },
     },
   },
@@ -322,70 +642,118 @@ const FALLBACK_PAGES: Record<string, CanvasPageData> = {
     title: 'About Us',
     path: '/about',
     component_tree: {
-      'hero-about': {
-        uuid: 'hero-about',
+      'abt-1': {
+        uuid: 'abt-1',
         component_id: 'sdc.flexus.hero-side-by-side',
         inputs: {
-          eyebrow: 'Our Vision & Methodology',
-          heading: 'We Build Unfair Advantages for Category Leaders',
-          summary: 'Apex Digital was founded on a simple truth: sustainable growth is engineered through empirical data, exceptional creative talent, and relentless experimentation.',
+          eyebrow: 'Our Philosophy',
+          media: {
+            src: '/themes/contrib/flexus/components/hero-side-by-side/assets/boliviainteligente-QPu42AAJ5ZY-unsplash.jpg',
+            alt: 'Apex Digital Agency Strategy & Culture',
+          },
         },
         parent_uuid: null,
         slot: null,
       },
-      'values-section': {
-        uuid: 'values-section',
+      'abt-2': {
+        uuid: 'abt-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'We Turn Data Signals Into Compounding Revenue',
+          level: 1,
+          text: 'Apex Digital was founded on one core premise: marketing must be measurable, transparent, and ruthlessly tied to bottom-line profitability.',
+          text_align: 'left',
+        },
+        parent_uuid: 'abt-1',
+        slot: 'hero_slot',
+      },
+      'abt-3': {
+        uuid: 'abt-3',
+        component_id: 'sdc.flexus.button',
+        inputs: {
+          label: 'Meet Our Team',
+          href: '/about/team',
+          variant: 'primary',
+        },
+        parent_uuid: 'abt-2',
+        slot: 'actions',
+      },
+      'abt-10': {
+        uuid: 'abt-10',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '33-33-33' },
         parent_uuid: null,
         slot: null,
       },
-      'val-1': {
-        uuid: 'val-1',
+      'abt-11': {
+        uuid: 'abt-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Our Guiding Principles',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'abt-10',
+        slot: 'header_slot',
+      },
+      'abt-12': {
+        uuid: 'abt-12',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Empirical Rigor',
-          summary: 'We do not rely on intuition when data provides clear answers. Every hypothesis is validated through rigorous testing.',
+          heading_text: '1. Radical Transparency',
+          text: 'No black-box reporting or vanity metrics. You have 24/7 direct access to live dashboards, raw campaign data, and weekly strategy notes.',
         },
-        parent_uuid: 'values-section',
+        parent_uuid: 'abt-10',
         slot: 'main_slot',
       },
-      'val-2': {
-        uuid: 'val-2',
+      'abt-13': {
+        uuid: 'abt-13',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Radical Transparency',
-          summary: 'Real-time dashboards, unvarnished reporting, and aligned incentives. You always know exactly how your capital performs.',
+          heading_text: '2. Data-Backed Hypotheses',
+          text: 'We test with intention. Every ad variation, SEO keyword cluster, and landing page experiment is backed by statistical significance.',
         },
-        parent_uuid: 'values-section',
+        parent_uuid: 'abt-10',
         slot: 'main_slot',
       },
-      'val-3': {
-        uuid: 'val-3',
+      'abt-14': {
+        uuid: 'abt-14',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Speed & Execution',
-          summary: 'Ideas are cheap. Speed of iteration is the ultimate competitive moat in dynamic digital marketplaces.',
-          href: '/about/team',
+          heading_text: '3. Focus on Profitability',
+          text: 'Traffic is worthless without conversion. We optimize for Customer Lifetime Value (LTV), Payback Period, and Net Contribution Margin.',
         },
-        parent_uuid: 'values-section',
+        parent_uuid: 'abt-10',
         slot: 'main_slot',
       },
-      'cta-about': {
-        uuid: 'cta-about',
-        component_id: 'sdc.flexus.cta',
-        inputs: {
-          heading: 'Meet the Leadership Team Behind Apex',
-          summary: 'Explore our cross-disciplinary team of performance strategists, engineers, and creative directors.',
-        },
+      'abt-20': {
+        uuid: 'abt-20',
+        component_id: 'sdc.flexus.section',
+        inputs: { columns: '100', background_color: 'muted' },
         parent_uuid: null,
         slot: null,
       },
-      'cta-team-btn': {
-        uuid: 'cta-team-btn',
+      'abt-21': {
+        uuid: 'abt-21',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'Meet the Strategists & Engineers Driving Your ROI',
+          level: 2,
+          text: 'Explore our dedicated team sub-section to see the department leads and growth architects behind Apex Digital.',
+          text_align: 'center',
+        },
+        parent_uuid: 'abt-20',
+        slot: 'main_slot',
+      },
+      'abt-22': {
+        uuid: 'abt-22',
         component_id: 'sdc.flexus.button',
-        inputs: { text: 'View Our Team', href: '/about/team', variant: 'primary' },
-        parent_uuid: 'cta-about',
+        inputs: {
+          label: 'View Full Team Roster',
+          href: '/about/team',
+          variant: 'primary',
+        },
+        parent_uuid: 'abt-21',
         slot: 'actions',
       },
     },
@@ -395,172 +763,199 @@ const FALLBACK_PAGES: Record<string, CanvasPageData> = {
     title: 'Our Team',
     path: '/about/team',
     component_tree: {
-      'hero-team': {
-        uuid: 'hero-team',
+      'team-1': {
+        uuid: 'team-1',
         component_id: 'sdc.flexus.hero-side-by-side',
         inputs: {
           eyebrow: 'Leadership & Specialists',
-          heading: 'The Growth Architects of Apex Digital',
-          summary: 'A multidisciplinary collective of senior performance media buyers, technical SEO architects, conversion scientists, and creative strategists.',
+          media: {
+            src: '/themes/contrib/flexus/components/image/assets/pexels-felix-mittermeier-1209650.jpg',
+            alt: 'Apex Digital Growth Architects and Engineers',
+          },
         },
         parent_uuid: null,
         slot: null,
       },
-      'team-grid': {
-        uuid: 'team-grid',
+      'team-2': {
+        uuid: 'team-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: 'The Minds Behind Your Compounding Growth',
+          level: 1,
+          text: 'We are senior growth practitioners, technical SEO engineers, and performance media buyers dedicated to accelerating enterprise revenue.',
+          text_align: 'left',
+        },
+        parent_uuid: 'team-1',
+        slot: 'hero_slot',
+      },
+      'team-3': {
+        uuid: 'team-3',
+        component_id: 'sdc.flexus.button',
+        inputs: {
+          label: 'Work With Our Team',
+          href: '/contact',
+          variant: 'primary',
+        },
+        parent_uuid: 'team-2',
+        slot: 'actions',
+      },
+      'team-10': {
+        uuid: 'team-10',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '33-33-33' },
         parent_uuid: null,
         slot: null,
       },
-      'member-1': {
-        uuid: 'member-1',
+      'team-11': {
+        uuid: 'team-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Executive Leadership',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'team-10',
+        slot: 'header_slot',
+      },
+      'team-12': {
+        uuid: 'team-12',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Marcus Vance',
-          summary: 'Founder & Managing Director • 15+ years scaling tier-1 ecommerce and SaaS ecosystems with over $500M in managed media spend.',
+          heading_text: 'Marcus Vance',
+          text: '<strong>Founder & Managing Director</strong><br/>14+ years scaling tech companies through full-funnel marketing architectures.',
+          is_text_centered: true,
         },
-        parent_uuid: 'team-grid',
+        parent_uuid: 'team-10',
         slot: 'main_slot',
       },
-      'member-2': {
-        uuid: 'member-2',
+      'team-13': {
+        uuid: 'team-13',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Sarah Jenkins',
-          summary: 'VP of Performance Paid Media • Former lead growth engineer at Silicon Valley hyper-growth startups specializing in algorithmic bidding.',
+          heading_text: 'Sarah Jenkins',
+          text: '<strong>VP of Performance Paid Media</strong><br/>Managed over $50M in high-ROI ad spend across Google, Meta, and TikTok.',
+          is_text_centered: true,
         },
-        parent_uuid: 'team-grid',
+        parent_uuid: 'team-10',
         slot: 'main_slot',
       },
-      'member-3': {
-        uuid: 'member-3',
+      'team-14': {
+        uuid: 'team-14',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'David Park',
-          summary: 'Director of Technical SEO • Specialist in large-scale JavaScript web applications, Core Web Vitals optimization, and generative search.',
+          heading_text: 'David Park',
+          text: '<strong>Director of Technical SEO & CRO</strong><br/>Software engineer turned enterprise search strategist and analytics architect.',
+          is_text_centered: true,
         },
-        parent_uuid: 'team-grid',
+        parent_uuid: 'team-10',
         slot: 'main_slot',
       },
-      'member-4': {
-        uuid: 'member-4',
-        component_id: 'sdc.flexus.card',
-        inputs: {
-          title: 'Amanda Chen',
-          summary: 'Lead Conversion Rate Engineer • Behavioral psychologist and frontend engineer with over 1,200 successful multivariate experiments.',
-        },
-        parent_uuid: 'team-grid',
-        slot: 'main_slot',
-      },
-      'member-5': {
-        uuid: 'member-5',
-        component_id: 'sdc.flexus.card',
-        inputs: {
-          title: 'Liam O\'Connor',
-          summary: 'Director of Content & Inbound • Creator of viral inbound content hubs and enterprise digital PR campaigns with high domain authority.',
-        },
-        parent_uuid: 'team-grid',
-        slot: 'main_slot',
-      },
-      'member-6': {
-        uuid: 'member-6',
-        component_id: 'sdc.flexus.card',
-        inputs: {
-          title: 'Jessica Miller',
-          summary: 'Lead Paid Social Strategist • Expert in short-form creative production, TikTok/Meta ad hook architecture, and DTC customer journey tuning.',
-        },
-        parent_uuid: 'team-grid',
-        slot: 'main_slot',
-      },
-    },
-  },
-  '/case-studies': {
-    id: 'canvas-case-studies',
-    title: 'Case Studies',
-    path: '/case-studies',
-    component_tree: {
-      'hero-cs': {
-        uuid: 'hero-cs',
-        component_id: 'sdc.flexus.hero-side-by-side',
-        inputs: {
-          eyebrow: 'Proven Track Record',
-          heading: 'Documented Case Spotlights & Client Returns',
-          summary: 'Explore how our performance marketing and technical SEO strategies have delivered transformational financial returns for our partners.',
-        },
-        parent_uuid: null,
-        slot: null,
-      },
-      'cs-grid': {
-        uuid: 'cs-grid',
+      'team-20': {
+        uuid: 'team-20',
         component_id: 'sdc.flexus.section',
-        inputs: { columns: '33-33-33' },
+        inputs: { columns: '33-33-33', background_color: 'muted' },
         parent_uuid: null,
         slot: null,
       },
-      'cs-1': {
-        uuid: 'cs-1',
+      'team-21': {
+        uuid: 'team-21',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Practice Leads & Growth Specialists',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'team-20',
+        slot: 'header_slot',
+      },
+      'team-22': {
+        uuid: 'team-22',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'FinTech Unicorn Scale-Up',
-          summary: '+410% Qualified MQL Growth and -48% Customer Acquisition Cost (CAC) within 6 months via programmatic Google Ads & landing page CRO.',
-          href: '/contact',
+          heading_text: 'Amanda Chen',
+          text: '<strong>Lead Conversion Rate Engineer</strong><br/>Expert in behavioral economics, usability testing, and statistical A/B modeling.',
+          is_text_centered: true,
         },
-        parent_uuid: 'cs-grid',
+        parent_uuid: 'team-20',
         slot: 'main_slot',
       },
-      'cs-2': {
-        uuid: 'cs-2',
+      'team-23': {
+        uuid: 'team-23',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Global DTC Luxury Brand',
-          summary: 'From $1.2M to $8.4M Annual Run-Rate with 4.8x Blended ROAS across Meta, TikTok Shop, and bespoke email nurture sequences.',
-          href: '/contact',
+          heading_text: "Liam O'Connor",
+          text: '<strong>Director of Content & Inbound</strong><br/>Journalist & strategist focused on high-authority B2B whitepapers and thought leadership.',
+          is_text_centered: true,
         },
-        parent_uuid: 'cs-grid',
+        parent_uuid: 'team-20',
         slot: 'main_slot',
       },
-      'cs-3': {
-        uuid: 'cs-3',
+      'team-24': {
+        uuid: 'team-24',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Enterprise B2B Cloud Platform',
-          summary: 'Ranked #1 for 180+ High-Intent Keywords, driving $14M in closed-won pipeline through Technical Headless SEO overhaul.',
-          href: '/contact',
+          heading_text: 'Jessica Miller',
+          text: '<strong>Lead Paid Social Strategist</strong><br/>Creative director and performance buyer specialized in Meta and TikTok scale.',
+          is_text_centered: true,
         },
-        parent_uuid: 'cs-grid',
+        parent_uuid: 'team-20',
         slot: 'main_slot',
       },
-      'testimonials': {
-        uuid: 'testimonials',
+      'team-30': {
+        uuid: 'team-30',
         component_id: 'sdc.flexus.section',
-        inputs: { columns: '50-50' },
+        inputs: { columns: '100' },
         parent_uuid: null,
         slot: null,
       },
-      'test-1': {
-        uuid: 'test-1',
-        component_id: 'sdc.flexus.card-testimonial',
+      'team-31': {
+        uuid: 'team-31',
+        component_id: 'sdc.flexus.heading',
         inputs: {
-          quote: 'Apex Digital transformed our marketing department from an expense center into our highest-yielding growth engine. Truly unmatched execution.',
-          author: 'Elena Rostova',
-          role: 'Chief Marketing Officer',
-          company: 'Vertex Cloud',
+          heading_text: 'Our Working Culture & Standards',
+          level: 2,
+          align: 'center',
         },
-        parent_uuid: 'testimonials',
+        parent_uuid: 'team-30',
+        slot: 'header_slot',
+      },
+      'team-32': {
+        uuid: 'team-32',
+        component_id: 'sdc.flexus.accordion-container',
+        inputs: {},
+        parent_uuid: 'team-30',
         slot: 'main_slot',
       },
-      'test-2': {
-        uuid: 'test-2',
-        component_id: 'sdc.flexus.card-testimonial',
+      'team-faq-1': {
+        uuid: 'team-faq-1',
+        component_id: 'sdc.flexus.accordion',
         inputs: {
-          quote: 'Their CRO and performance engineering reduced our CAC by half while doubling conversion volume. The ROI was apparent in week three.',
-          author: 'Jonathan Hayes',
-          role: 'Founder & CEO',
-          company: 'Aura Health',
+          title: 'Senior-Only Squads',
+          content: 'We do not bait-and-switch clients with junior staff. Every client is paired with senior growth practitioners who directly manage strategy and execution.',
+          open_by_default: true,
         },
-        parent_uuid: 'testimonials',
-        slot: 'main_slot',
+        parent_uuid: 'team-32',
+        slot: 'accordion_content',
+      },
+      'team-faq-2': {
+        uuid: 'team-faq-2',
+        component_id: 'sdc.flexus.accordion',
+        inputs: {
+          title: 'Asynchronous Communication & Live Dashboards',
+          content: 'We respect your time. Weekly executive video briefs, real-time Slack channels, and live BI dashboards keep you informed without redundant meetings.',
+        },
+        parent_uuid: 'team-32',
+        slot: 'accordion_content',
+      },
+      'team-faq-3': {
+        uuid: 'team-faq-3',
+        component_id: 'sdc.flexus.accordion',
+        inputs: {
+          title: 'Continuous Experimentation Budget',
+          content: '15% of our internal agency hours are invested in proprietary testing frameworks and algorithm research to maintain an unfair advantage for our partners.',
+        },
+        parent_uuid: 'team-32',
+        slot: 'accordion_content',
       },
     },
   },
@@ -569,42 +964,66 @@ const FALLBACK_PAGES: Record<string, CanvasPageData> = {
     title: 'Contact Us',
     path: '/contact',
     component_tree: {
-      'hero-contact': {
-        uuid: 'hero-contact',
+      'cnt-1': {
+        uuid: 'cnt-1',
         component_id: 'sdc.flexus.hero-side-by-side',
         inputs: {
-          eyebrow: 'Start Your Growth Journey',
-          heading: 'Let’s Engineer Your Next Revenue Breakthrough',
-          summary: 'Schedule a discovery session with our executive growth team. We will analyze your current funnel and outline custom opportunities.',
+          eyebrow: 'Get In Touch',
+          media: {
+            src: '/themes/contrib/flexus/components/card/assets/jj-ying-8bghKxNU1j0-unsplash.jpg',
+            alt: 'Schedule a Discovery Session',
+          },
         },
         parent_uuid: null,
         slot: null,
       },
-      'contact-layout': {
-        uuid: 'contact-layout',
+      'cnt-2': {
+        uuid: 'cnt-2',
+        component_id: 'sdc.flexus.cta',
+        inputs: {
+          heading_text: "Let's Build Your Growth Blueprint",
+          level: 1,
+          text: 'Schedule a confidential 30-minute growth assessment with our senior leadership team or send us a message below.',
+          text_align: 'left',
+        },
+        parent_uuid: 'cnt-1',
+        slot: 'hero_slot',
+      },
+      'cnt-10': {
+        uuid: 'cnt-10',
         component_id: 'sdc.flexus.section',
         inputs: { columns: '50-50' },
         parent_uuid: null,
         slot: null,
       },
-      'info-card': {
-        uuid: 'info-card',
+      'cnt-11': {
+        uuid: 'cnt-11',
+        component_id: 'sdc.flexus.heading',
+        inputs: {
+          heading_text: 'Get in Touch with Our Strategists',
+          level: 2,
+          align: 'center',
+        },
+        parent_uuid: 'cnt-10',
+        slot: 'header_slot',
+      },
+      'cnt-12': {
+        uuid: 'cnt-12',
         component_id: 'sdc.flexus.card',
         inputs: {
-          title: 'Direct Strategic Hubs',
-          summary: 'San Francisco: 500 Howard Street, Suite 400 • New York: 1 World Trade Center, Floor 62 • Email: growth@apexdigital.com • Response Guarantee: Within 4 business hours.',
+          heading_text: 'Direct Channels & Office Hubs',
+          text: '<p class="space-y-3"><strong>Email:</strong> growth@apexdigital.example<br/><strong>Phone:</strong> +1 (415) 890-APEX<br/><br/><strong>San Francisco Hub:</strong> 555 Mission St, Ste 2400, San Francisco, CA 94105<br/><strong>New York Hub:</strong> 175 Varick St, 8th Fl, New York, NY 10014<br/><br/><strong>Guaranteed Response:</strong> Within 4 business hours.</p>',
         },
-        parent_uuid: 'contact-layout',
+        parent_uuid: 'cnt-10',
         slot: 'main_slot',
       },
-      'contact-form-card': {
-        uuid: 'contact-form-card',
-        component_id: 'sdc.flexus.card',
+      'cnt-13': {
+        uuid: 'cnt-13',
+        component_id: 'sdc.flexus.form',
         inputs: {
-          title: 'Request Strategy Audit',
-          summary: 'Fill out your company details to connect directly with a dedicated Growth Lead.',
+          contact_form_id: 'feedback',
         },
-        parent_uuid: 'contact-layout',
+        parent_uuid: 'cnt-10',
         slot: 'main_slot',
       },
     },
@@ -631,13 +1050,28 @@ export async function fetchCanvasPage(pathAlias: string): Promise<CanvasPageData
       );
     });
 
-    if (page && page.attributes?.component_tree && Object.keys(page.attributes.component_tree).length > 0) {
-      return {
-        id: page.id,
-        title: page.attributes.title,
-        path: page.attributes.path?.alias || normalizedPath,
-        component_tree: page.attributes.component_tree,
-      };
+    if (page && page.attributes) {
+      // Components can be in attributes.components (array or dict) or attributes.component_tree
+      const rawComponents = page.attributes.components || page.attributes.component_tree;
+      if (rawComponents) {
+        let tree: Record<string, CanvasComponentNode> = {};
+        if (Array.isArray(rawComponents)) {
+          rawComponents.forEach((comp: any) => {
+            if (comp.uuid) tree[comp.uuid] = comp;
+          });
+        } else if (typeof rawComponents === 'object') {
+          tree = rawComponents;
+        }
+
+        if (Object.keys(tree).length > 0) {
+          return {
+            id: page.id,
+            title: page.attributes.title,
+            path: page.attributes.path?.alias || normalizedPath,
+            component_tree: tree,
+          };
+        }
+      }
     }
   } catch (err) {
     console.warn(`[Next.js Drupal Client] Live fetch notice for ${normalizedPath}: ${(err as Error).message}. Falling back to pre-seeded component tree.`);
@@ -661,4 +1095,5 @@ export async function fetchAllCanvasPages(): Promise<Array<{ title: string; path
     }));
   }
 }
+
 
